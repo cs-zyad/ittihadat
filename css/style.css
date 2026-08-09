@@ -532,6 +532,7 @@ html:not(.js) .acc-panel{grid-template-rows:1fr}
 }
 .form-success h3{margin-bottom:8px}
 .form-success p{color:var(--slate);font-size:.9rem}
+.form-success .form-note a{color:var(--ink);font-weight:600;text-decoration:underline}
 
 /* ---------- الفوتر ---------- */
 /* داكن افتراضيًا — قاعدة تُغلق الصفحة بنفس لغة الأسطح الداكنة في الهوية */

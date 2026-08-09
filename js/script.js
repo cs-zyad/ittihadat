@@ -148,12 +148,14 @@ if(acc){
   });
 }
 
-// النموذج (صفحة "تواصل معنا" فقط)
+// النموذج (صفحة "تواصل معنا" فقط) — يفتح واتساب المستشار برسالة جاهزة ببيانات العميل
 const submitBtn = document.getElementById('submitBtn');
 if(submitBtn){
   submitBtn.addEventListener('click', () => {
-    const name = document.getElementById('fName').value.trim();
+    const name  = document.getElementById('fName').value.trim();
     const phone = document.getElementById('fPhone').value.trim();
+    const type  = document.getElementById('fType').value;
+    const msg   = document.getElementById('fMsg').value.trim();
     if(!name || !phone){
       [['fName',name],['fPhone',phone]].forEach(([id,val])=>{
         const el = document.getElementById(id);
@@ -162,6 +164,24 @@ if(submitBtn){
       });
       return;
     }
+    // wa.me لا يقبل إلا أرقامًا لاتينية، والحقل قد يستقبل أرقامًا عربية أو مسافات
+    const digits = s => s.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\D/g,'');
+    const wa = digits(submitBtn.dataset.wa || '');
+    const lines = [
+      'طلب تقييم تشغيلي — موقع إتحادات',
+      '',
+      'الاسم: ' + name,
+      'الجوال: ' + phone,
+      'نوع العقار: ' + type
+    ];
+    if(msg) lines.push('التفاصيل: ' + msg);
+    const url = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(lines.join('\n'));
+
+    // الرابط الاحتياطي يُملأ قبل الفتح حتى يبقى مفيدًا لو منع المتصفح النافذة
+    const waLink = document.getElementById('waLink');
+    if(waLink) waLink.href = url;
+    window.open(url, '_blank', 'noopener');
+
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
   });
