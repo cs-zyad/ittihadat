@@ -18,7 +18,7 @@
 ## هيكل المشروع
 
 ```
-mollak/
+ittihadat/
 ├── index.html          # الصفحة الرئيسية
 ├── audience/
 │   └── index.html      # صفحة "من نخدم"
@@ -58,8 +58,8 @@ mollak/
 
 1. **استنساخ المستودع:**
    ```bash
-   git clone https://github.com/<username>/mollak.git
-   cd mollak
+   git clone https://github.com/cs-zyad/ittihadat.git
+   cd ittihadat
    ```
 
 2. **فتح الموقع:**
